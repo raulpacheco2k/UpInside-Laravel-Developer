@@ -11,7 +11,21 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix
+    .sass('resources/views/assets/scss/reset.scss', 'public/assets/css/reset.css')
+    .sass('resources/views/assets/scss/boot.scss', 'public/assets/css/boot.css')
+    .sass('resources/views/assets/scss/login.scss', 'public/assets/css/login.css')
+
+    .scripts([
+        'resources/views/assets/js/jquery.min.js'
+    ], 'public/assets/js/jquery.min.js')
+
+    .copyDirectory('resources/views/assets/css/fonts', 'public/assets/css/fonts')
+    .copyDirectory('resources/views/assets/images', 'public/assets/images')
+
+    .options({
+        processCssUrls: false
+    })
+
+    .version()
+
