@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['as' => 'admin', 'name' => 'admin', 'prefix' => 'admin'], function() {
+
+    Route::get('/', [\App\Http\Controllers\AuthController::class, 'index'])->name('login');
+
 });
