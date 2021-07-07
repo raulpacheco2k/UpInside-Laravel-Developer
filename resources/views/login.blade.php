@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <link rel="stylesheet" href="{{ asset(mix('assets/css/reset.css')) }}"/>
-    <link rel="stylesheet" href="{{ asset(mix('assets/css/boot.css')) }}"/>
-    <link rel="stylesheet" href="{{ asset(mix('assets/css/login.css'))  }}"/>
-    <link rel="icon" type="image/png" href="{{ asset(mix('assets/images/favicon.png')) }}"/>
+    <link rel="stylesheet" href="{{ asset(mix('assets/admin/css/reset.css')) }}"/>
+    <link rel="stylesheet" href="{{ asset(mix('assets/admin/css/boot.css')) }}"/>
+    <link rel="stylesheet" href="{{ asset(mix('assets/admin/css/login.css'))  }}"/>
+    <link rel="icon" type="image/png" href="{{ asset(mix('assets/admin/images/favicon.png')) }}"/>
 
     <title>UpAdmin - Site Control</title>
 </head>
@@ -23,7 +23,7 @@
                 <h1>Login</h1>
             </header>
 
-            <form name="login" action="" method="post" autocomplete="off">
+            <form name="login" action="{{ route('admin.home') }}" method="get" autocomplete="off">
                 <label>
                     <span class="field icon-envelope">E-mail:</span>
                     <input type="email" name="email" placeholder="Informe seu e-mail" required/>
@@ -54,7 +54,7 @@
 
 </div>
 
-<script src="{{ asset(mix('assets/js/jquery.min.js')) }}"></script>
+<script src="{{ asset(mix('assets/admin/js/jquery.min.js')) }}"></script>
 
 </body>
 </html>

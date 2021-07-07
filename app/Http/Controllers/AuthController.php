@@ -17,6 +17,11 @@ class AuthController extends Controller
         return view('login');
     }
 
+    public function home()
+    {
+        return view('dashboard');
+    }
+
     /**
      * Show the form for creating a new resource.
      * @return Renderable
