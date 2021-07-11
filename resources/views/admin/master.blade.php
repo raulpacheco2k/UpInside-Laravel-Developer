@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ asset(mix('assets/admin/css/libs.css')) }}">
     <link rel="stylesheet" href="{{ asset(mix('assets/admin/css/boot.css')) }}"/>
     <link rel="stylesheet" href="{{ asset(mix('assets/admin/css/style.css')) }}"/>
+
+    @hasSection('css')
+        @yield('css')
+    @endif
+
     <link rel="icon" type="image/png" href="{{ asset(mix('assets/admin/images/favicon.png')) }}"/>
 
     <title>UpAdmin - Site Control</title>
@@ -91,6 +96,10 @@
 <script src="{{ asset(mix('assets/admin/js/jquery.min.js')) }}"></script>
 <script src="{{ asset(mix('assets/admin/js/libs.js')) }}"></script>
 <script src="{{ asset(mix('assets/admin/js/scripts.js')) }}"></script>
+
+@hasSection('js')
+    @yield('js')
+@endif
 
 </body>
 </html>
