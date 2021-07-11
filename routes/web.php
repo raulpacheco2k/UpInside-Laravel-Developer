@@ -14,7 +14,10 @@ use \App\Http\Controllers\AuthController;
 |
 */
 
-Route::group(['as' => 'admin.', 'name' => 'asas', 'prefix' => 'admin'], function() {
+Route::group([
+    'as' => 'admin.',
+    'prefix' => 'admin'
+], function() {
 
     Route::get('/', [AuthController::class, 'index'])->name('login');
     Route::get('/home', [AuthController::class, 'home'])->name('home');
