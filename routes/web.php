@@ -19,4 +19,6 @@ Route::group(['as' => 'admin.', 'name' => 'asas', 'prefix' => 'admin'], function
     Route::get('/', [AuthController::class, 'index'])->name('login');
     Route::get('/home', [AuthController::class, 'home'])->name('home');
 
+    Route::get('uers/team', [User::class, 'team'])->name('users.team');
+    Route::resource('users', User::class);
 });
