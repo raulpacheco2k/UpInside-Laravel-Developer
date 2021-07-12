@@ -1,18 +1,30 @@
-/node_modules
+# Public
 /public/hot
 /public/storage
 /public/assets
+/public/mix-manifest.json
 /storage/*.key
+
+# NPM
+/node_modules
+package-lock.json
+
+# Composer
 /vendor
+composer.lock
+
+# PHPStorm
+/.idea
+
+# Laravel
 .env
 .env.backup
+
+# Others
 .phpunit.result.cache
 docker-compose.override.yml
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/.idea
 /.vscode
-composer.lock
-package-lock.json
