@@ -1,6 +1,6 @@
 <div>
     @if ($errors->has('name'))
-        <div class="mt-3 alert alert-{{ $error }}">
+        <div class="alert-{{ $error }}">
             <p class="icon-asterisk">{{ $errors->first('name') }}</p>
         </div>
     @endif
