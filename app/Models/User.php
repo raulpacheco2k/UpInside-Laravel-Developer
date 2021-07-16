@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,6 +19,30 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'gender',
+        'document',
+        'document_secondary',
+        'document_secondary_complement',
+        'date_of_birth',
+        'place_of_birth',
+        'civil_status',
+        'cover',
+        'income',
+        'telephone',
+        'cell',
+        'lessor',
+        'lessee',
+        'type_of_communion',
+        'spouse_document',
+        'spouse_occupation',
+        'spouse_income',
+        'zipcode',
+        'state',
+        'city',
+        'neighborhood',
+        'street',
+        'number',
+        'complement'
     ];
 
     /**
@@ -38,7 +61,34 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'name' => 'string',
+        'email' => 'string',
         'email_verified_at' => 'datetime',
+        'gender' => 'integer',
+        'document' => 'integer',
+        'document_secondary' => 'integer',
+        'document_secondary_complement' => 'string',
+        'date_of_birth' => 'date',
+        'place_of_birth' => 'string',
+        'civil_status' => 'integer',
+        'cover' => 'string',
+        'occupation' => 'string',
+        'income' => 'integer',
+        'telephone' => 'integer',
+        'cell' => 'integer',
+        'lessor' => 'boolean',
+        'lessee' => 'boolean',
+        'type_of_communion' => 'integer',
+        'spouse_document' => 'integer',
+        'spouse_occupation' => 'string',
+        'spouse_income' => 'integer',
+        'zipcode' => 'integer',
+        'state' => 'string',
+        'city' => 'string',
+        'neighborhood' => 'string',
+        'street' => 'string',
+        'number' => 'integer',
+        'complement' => 'string',
     ];
 
     /**
@@ -46,39 +96,36 @@ class User extends Authenticatable
      */
     public static $rules = [
         'name' => 'required|min:3|max:255',
-        'gender' => 'in:male,female,other',
-        'document' => 'required|unique:users|min:11',
-        'document_secondary' => 'required|unique:users|min:8|max:12',
-        'document_secondary_complement' => 'required',
+        'gender' => 'required|in:male,female,other',
+        'document' => 'required|min:11', // unique:users
+        'i' => 'nullable|min:8|max:12', // unique:users
+        'document_secondary_complement' => 'nullable',
         'date_of_birth' => 'required|date_format:d/m/Y',
         'place_of_birth' => 'string',
         'civil_status' => 'required|in:married,separated,single,divorced,widower',
-        'cover' => 'required',
-        'occupation' => 'required',
+        'cover' => 'file|nullable',
         'income' => 'required',
-        'company_work' => 'required',
-        'zipcode' => 'required',
-        'street' => 'required',
-        'number' => 'required',
-        'complement' => 'required',
-        'neighborhood' => 'required',
-        'state' => 'required',
-        'city' => 'required',
-        'telephone' => 'required',
+        'telephone' => 'nullable',
         'cell' => 'required',
         'email' => 'required',
-        'password' => 'required',
 
+        // TODO: Criar um modelo para o tipo de cliente
+        'lessor' => 'required_without:lessee|bool',
+        'lessee' => 'required_without:lessor|bool',
+
+        // TODO: Criar um modelo para cônjuge
         'type_of_communion' => 'required_if:civil_status,married,separated|in:Comunhão Universal de Ben,Comunhão Parcial de Bens,Separação Total de Bens,Participação Final de Aquestos',
-        'spouse_name' => 'required_if:civil_status,married,separated',
-        'spouse_genre' => 'required_if:civil_status,married,separated',
-        'spouse_document' => 'required_if:civil_status,married,separated',
-        'spouse_document_secondary' => 'required_if:civil_status,married,separated',
-        'spouse_document_secondary_complement' => 'required_if:civil_status,married,separated',
-        'spouse_date_of_birth' => 'required_if:civil_status,married,separated',
-        'spouse_place_of_birth' => 'required_if:civil_status,married,separated',
-        'spouse_occupation' => 'required_if:civil_status,married,separated',
-        'spouse_income' => 'required_if:civil_status,married,separated',
-        'spouse_company_work' => 'required_if:civil_status,married,separated'
+        'spouse_document' => 'required_if:civil_status,married',
+        'spouse_occupation' => 'required_if:civil_status,married',
+        'spouse_income' => 'required_if:civil_status,married',
+
+        // TODO: Criar um modelo para endereço
+        'zipcode' => 'required',
+        'state' => 'required',
+        'city' => 'required',
+        'neighborhood' => 'required',
+        'street' => 'required',
+        'number' => 'required',
+        'complement' => 'nullable',
     ];
 }
