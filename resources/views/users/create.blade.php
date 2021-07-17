@@ -31,98 +31,115 @@
                     <li class="nav_tabs_item">
                         <a href="#realties" class="nav_tabs_item_link">Imóveis</a>
                     </li>
-                    <li class="nav_tabs_item">
-                        <a href="#management" class="nav_tabs_item_link">Administrativo</a>
-                    </li>
                 </ul>
 
-                <form class="app_form" action="" method="post" enctype="multipart/form-data">
+                <form class="app_form" action="{{ route('admin.users.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="nav_tabs_content">
                         <div id="data">
                             <div class="label_gc">
                                 <span class="legend">Perfil:</span>
                                 <label class="label">
-                                    <input type="checkbox" name="lessor"><span>Locatário</span>
+                                    {{ Form::checkbox('lessor', true) }}
+                                    <span>Locatário</span>
                                 </label>
 
                                 <label class="label">
-                                    <input type="checkbox" name="lessee"><span>Locador</span>
+                                    {{ Form::checkbox('lessee', true) }}
+                                    <span>Locador</span>
                                 </label>
                             </div>
 
                             <label class="label">
-                                <span class="legend">*Nome:</span>
-                                <input type="text" name="name" placeholder="Nome Completo" value=""/>
+                                {{ Form::label('name', 'Nome', array_merge(['class' => 'legend'])) }}
+                                {{ Form::text('name', null, array_merge(['class' => 'form-control'], ['placeholder' => 'Nome Completo', 'required'])) }}
+                                <x-validate-field field="name"/>
                             </label>
 
                             <div class="label_g2">
                                 <label class="label">
-                                    <span class="legend">*Genero:</span>
-                                    <select name="genre">
-                                        <option value="male">Masculino</option>
-                                        <option value="female">Feminino</option>
-                                        <option value="other">Outros</option>
-                                    </select>
+                                    {{ Form::label('gender', 'Género', array_merge(['class' => 'legend'])) }}
+                                    {{ Form::select('gender', \App\Models\Gender::toArray(), null, array_merge(['required'])) }}
                                 </label>
 
                                 <label class="label">
-                                    <span class="legend">*CPF:</span>
-                                    <input type="tel" class="mask-doc" name="document" placeholder="CPF do Cliente"
-                                           value=""/>
+                                    {{ Form::label('document', 'CPF', array_merge(['class' => 'legend'])) }}
+                                    {{ Form::tel('document', null, array_merge(['class' => 'mask-doc'], ['placeholder' => 'CPF', 'required'])) }}
                                 </label>
                             </div>
 
                             <div class="label_g2">
                                 <label class="label">
-                                    <span class="legend">*RG:</span>
-                                    <input type="text" name="document_secondary" placeholder="RG do Cliente"
-                                           value=""/>
+                                    {{ Form::label('document_secondary', 'RG', array_merge(['class' => 'legend'])) }}
+                                    {{ Form::number('document_secondary', null, array_merge(['class' => 'form-control'], ['placeholder' => 'RG'])) }}
                                 </label>
 
                                 <label class="label">
-                                    <span class="legend">Órgão Expedidor:</span>
-                                    <input type="text" name="document_secondary_complement" placeholder="Expedição"
-                                           value=""/>
+                                    {{ Form::label('document_secondary_complement', 'Órgão Expedidor', array_merge(['class' => 'legend'])) }}
+                                    {{ Form::text('document_secondary_complement', null, array_merge(['class' => 'form-control'], ['placeholder' => 'Expedição'])) }}
                                 </label>
                             </div>
 
                             <div class="label_g2">
                                 <label class="label">
-                                    <span class="legend">*Data de Nascimento:</span>
-                                    <input type="tel" name="date_of_birth" class="mask-date"
-                                           placeholder="Data de Nascimento" value=""/>
+                                    {{ Form::label('date_of_birth', 'Data de Nascimento', array_merge(['class' => 'legend'])) }}
+                                    {{ Form::date('date_of_birth', now(), array_merge(['placeholder' => 'Data de Nascimento'])) }}
                                 </label>
 
                                 <label class="label">
-                                    <span class="legend">*Naturalidade:</span>
-                                    <input type="text" name="place_of_birth" placeholder="Cidade de Nascimento"
-                                           value=""/>
+                                    {{ Form::label('place_of_birth', 'Naturalidade', array_merge(['class' => 'legend'])) }}
+                                    {{ Form::text('place_of_birth', null, array_merge(['placeholder' => 'Cidade de Nascimento'])) }}
                                 </label>
                             </div>
+
+
 
                             <div class="label_g2">
                                 <label class="label">
-                                    <span class="legend">*Estado Civil:</span>
-                                    <select name="civil_status">
-                                        <optgroup label="Cônjuge Obrigatório">
-                                            <option value="married">Casado</option>
-                                            <option value="separated">Separado</option>
-                                        </optgroup>
-                                        <optgroup label="Cônjuge não Obrigatório">
-                                            <option value="single">Solteiro</option>
-                                            <option value="divorced">Divorciado</option>
-                                            <option value="widower">Viúvo</option>
-                                        </optgroup>
-                                    </select>
+                                    {{ Form::label('civil_status', 'Estado civil', array_merge(['class' => 'legend'])) }}
+                                    {{ Form::select('civil_status', \App\Models\MaritalStatus::toArray(), null, array_merge(['required'])) }}
                                 </label>
 
                                 <label class="label">
-                                    <span class="legend">Foto</span>
-                                    <input type="file" name="cover">
+                                    {{ Form::label('cover', 'Foto', array_merge(['class' => 'legend'])) }}
+                                    {{ Form::file('cover') }}
                                 </label>
                             </div>
 
-                            <div class="app_collapse mt-2">
+                            <div id="spouse" class="app_collapse">
+                                <div class="app_collapse_header collapse">
+                                    <h3>Cônjuge</h3>
+                                    <span class="icon-plus-circle icon-notext"></span>
+                                </div>
+
+                                <div class="app_collapse_content d-none content_spouse">
+                                    <div class="label_g2">
+                                        <label class="label">
+                                            {{ Form::label('type_of_communion', 'Tipo de Comunhão', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::select('type_of_communion', \App\Models\MarriagePropertyRegimes::toArray(), null, array_merge(['class' => 'select2'])) }}
+                                        </label>
+
+                                        <label class="label">
+                                            {{ Form::label('spouse_document', 'CPF do Cônjuge', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('spouse_document', null, array_merge(['class' => 'mask-doc'], ['placeholder' => 'CPF do Cônjuge'])) }}
+                                        </label>
+                                    </div>
+
+                                    <div class="label_g2">
+                                        <label class="label">
+                                            {{ Form::label('spouse_occupation', 'Profissão', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('spouse_occupation', null, array_merge(['class' => 'mask-doc'], ['placeholder' => 'Profissão do cônjuge'])) }}
+                                        </label>
+
+                                        <label class="label">
+                                            {{ Form::label('spouse_income', 'Renda', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('spouse_income', null, array_merge(['class' => 'mask-money'])) }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="income" class="app_collapse">
                                 <div class="app_collapse_header collapse">
                                     <h3>Renda</h3>
                                     <span class="icon-plus-circle icon-notext"></span>
@@ -131,27 +148,19 @@
                                 <div class="app_collapse_content d-none">
                                     <div class="label_g2">
                                         <label class="label">
-                                            <span class="legend">*Profissão:</span>
-                                            <input type="text" name="occupation" placeholder="Profissão do Cliente"
-                                                   value=""/>
+                                            {{ Form::label('occupation', 'Profissão', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('occupation', null, array_merge(['placeholder' => 'Profissão do Cliente'])) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">*Renda:</span>
-                                            <input type="tel" name="income" class="mask-money"
-                                                   placeholder="Valores em Reais" value=""/>
+                                            {{ Form::label('income', 'Renda', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('income', null, array_merge(['class' => 'mask-money'], ['placeholder' => 'Profissão do Cliente'])) }}
                                         </label>
                                     </div>
-
-                                    <label class="label">
-                                        <span class="legend">*Empresa:</span>
-                                        <input type="text" name="company_work" placeholder="Contratante"
-                                               value=""/>
-                                    </label>
                                 </div>
                             </div>
 
-                            <div class="app_collapse mt-2">
+                            <div class="app_collapse">
                                 <div class="app_collapse_header collapse">
                                     <h3>Endereço</h3>
                                     <span class="icon-plus-circle icon-notext"></span>
@@ -160,55 +169,50 @@
                                 <div class="app_collapse_content d-none">
                                     <div class="label_g2">
                                         <label class="label">
-                                            <span class="legend">*CEP:</span>
-                                            <input type="tel" name="zipcode" class="mask-zipcode zip_code_search"
-                                                   placeholder="Digite o CEP" value=""/>
+                                            {{ Form::label('zipcode', 'CEP', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('zipcode', null, array_merge(['class' => 'mask-zipcode zip_code_search'], ['placeholder' => 'CEP'])) }}
                                         </label>
-                                    </div>
 
-                                    <label class="label">
-                                        <span class="legend">*Endereço:</span>
-                                        <input type="text" name="street" class="street"
-                                               placeholder="Endereço Completo" value=""/>
-                                    </label>
+                                            <label class="label">
+                                                {{ Form::label('state', 'Estado', array_merge(['class' => 'legend'])) }}
+                                                {{ Form::text('state', null, array_merge(['class' => 'state'], ['placeholder' => 'Estado'])) }}
+                                            </label>
+                                    </div>
 
                                     <div class="label_g2">
                                         <label class="label">
-                                            <span class="legend">*Número:</span>
-                                            <input type="text" name="number" placeholder="Número do Endereço"
-                                                   value=""/>
+                                            {{ Form::label('city', 'Cidade', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('city', null, array_merge(['class' => 'city'], ['placeholder' => 'Cidade'])) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">Complemento:</span>
-                                            <input type="text" name="complement" placeholder="Completo (Opcional)"
-                                                   value=""/>
+                                            {{ Form::label('neighborhood', 'Bairro', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('neighborhood', null, array_merge(['class' => 'neighborhood'], ['placeholder' => 'Bairro'])) }}
                                         </label>
                                     </div>
 
-                                    <label class="label">
-                                        <span class="legend">*Bairro:</span>
-                                        <input type="text" name="neighborhood" class="neighborhood"
-                                               placeholder="Bairro" value=""/>
-                                    </label>
-
                                     <div class="label_g2">
                                         <label class="label">
-                                            <span class="legend">*Estado:</span>
-                                            <input type="text" name="state" class="state" placeholder="Estado"
-                                                   value=""/>
+                                            {{ Form::label('street', 'Rua', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('street', null, array_merge(['class' => 'street'], ['placeholder' => 'Rua'])) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">*Cidade:</span>
-                                            <input type="text" name="city" class="city" placeholder="Cidade"
-                                                   value=""/>
+                                            {{ Form::label('number', 'Número', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('number', null, array_merge(['class' => 'number'], ['placeholder' => 'Número'])) }}
+                                        </label>
+                                    </div>
+
+                                    <div class="label_g1">
+                                        <label class="label">
+                                            {{ Form::label('complement', 'Complemento', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('complement', null, array_merge(['class' => 'complement'], ['placeholder' => 'Complemento'])) }}
                                         </label>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="app_collapse mt-2">
+                            <div class="app_collapse">
                                 <div class="app_collapse_header collapse">
                                     <h3>Contato</h3>
                                     <span class="icon-plus-circle icon-notext"></span>
@@ -217,38 +221,13 @@
                                 <div class="app_collapse_content d-none">
                                     <div class="label_g2">
                                         <label class="label">
-                                            <span class="legend">Residencial:</span>
-                                            <input type="tel" name="telephone" class="mask-phone"
-                                                   placeholder="Número do Telefonce com DDD" value=""/>
+                                            {{ Form::label('telephone', 'Telefone', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('telephone', null, array_merge(['class' => 'mask-phone'], ['placeholder' => 'Número do telefone com DDD'])) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">*Celular:</span>
-                                            <input type="tel" name="cell" class="mask-cell"
-                                                   placeholder="Número do Telefonce com DDD" value=""/>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="app_collapse mt-2">
-                                <div class="app_collapse_header collapse">
-                                    <h3>Acesso</h3>
-                                    <span class="icon-plus-circle icon-notext"></span>
-                                </div>
-
-                                <div class="app_collapse_content d-none">
-                                    <div class="label_g2">
-                                        <label class="label">
-                                            <span class="legend">*E-mail:</span>
-                                            <input type="email" name="email" placeholder="Melhor e-mail"
-                                                   value=""/>
-                                        </label>
-
-                                        <label class="label">
-                                            <span class="legend">Senha:</span>
-                                            <input type="password" name="password" placeholder="Senha de acesso"
-                                                   value=""/>
+                                            {{ Form::label('cell', 'Celular', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::text('cell', null, array_merge(['class' => 'mask-phone'], ['placeholder' => 'Número do celular com DDD'])) }}
                                         </label>
                                     </div>
                                 </div>
@@ -258,107 +237,38 @@
                         <div id="complementary" class="d-none">
                             <div class="app_collapse">
                                 <div class="app_collapse_header collapse">
-                                    <h3>Cônjuge</h3>
+                                    <h3>Acesso</h3>
                                     <span class="icon-plus-circle icon-notext"></span>
                                 </div>
 
-                                <div class="app_collapse_content d-none content_spouse">
-
-                                    <label class="label">
-                                        <span class="legend">Tipo de Comunhão:</span>
-                                        <select name="type_of_communion" class="select2">
-                                            <option value="Comunhão Universal de Ben">Comunhão Universal de Bens</option>
-                                            <option value="Comunhão Parcial de Bens">Comunhão Parcial de Bens</option>
-                                            <option value="Separação Total de Bens">Separação Total de Bens</option>
-                                            <option value="Participação Final de Aquestos">Participação Final de Aquestos
-                                            </option>
-                                        </select>
-                                    </label>
-
-                                    <label class="label">
-                                        <span class="legend">Nome:</span>
-                                        <input type="text" name="spouse_name" placeholder="Nome do Cônjuge"
-                                               value=""/>
-                                    </label>
-
+                                <div class="app_collapse_content d-none">
                                     <div class="label_g2">
                                         <label class="label">
-                                            <span class="legend">Genero:</span>
-                                            <select name="spouse_genre">
-                                                <option value="male">Masculino</option>
-                                                <option value="female">Feminino</option>
-                                                <option value="other">Outros</option>
-                                            </select>
+                                            {{ Form::label('email', 'E-mail', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::email('email', null, array_merge(['placeholder' => 'example@email.com.br'])) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">CPF:</span>
-                                            <input type="text" class="mask-doc" name="spouse_document"
-                                                   placeholder="CPF do Cliente" value=""/>
+                                            {{ Form::label('password', 'Senha', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::password('password', array_merge(['placeholder' => 'Senha segura'])) }}
                                         </label>
                                     </div>
-
-                                    <div class="label_g2">
-                                        <label class="label">
-                                            <span class="legend">RG:</span>
-                                            <input type="text" name="spouse_document_secondary"
-                                                   placeholder="RG do Cliente" value=""/>
-                                        </label>
-
-                                        <label class="label">
-                                            <span class="legend">Órgão Expedidor:</span>
-                                            <input type="text" name="spouse_document_secondary_complement"
-                                                   placeholder="Expedição" value=""/>
-                                        </label>
-                                    </div>
-
-                                    <div class="label_g2">
-                                        <label class="label">
-                                            <span class="legend">Data de Nascimento:</span>
-                                            <input type="tel" class="mask-date" name="spouse_date_of_birth"
-                                                   placeholder="Data de Nascimento" value=""/>
-                                        </label>
-
-                                        <label class="label">
-                                            <span class="legend">Naturalidade:</span>
-                                            <input type="text" name="spouse_place_of_birth"
-                                                   placeholder="Cidade de Nascimento" value=""/>
-                                        </label>
-                                    </div>
-
-                                    <div class="label_g2">
-                                        <label class="label">
-                                            <span class="legend">Profissão:</span>
-                                            <input type="text" name="spouse_occupation"
-                                                   placeholder="Profissão do Cliente" value=""/>
-                                        </label>
-
-                                        <label class="label">
-                                            <span class="legend">Renda:</span>
-                                            <input type="text" class="mask-money" name="spouse_income"
-                                                   placeholder="Valores em Reais" value=""/>
-                                        </label>
-                                    </div>
-
-                                    <label class="label">
-                                        <span class="legend">Empresa:</span>
-                                        <input type="text" name="spouse_company_work" placeholder="Contratante"
-                                               value=""/>
-                                    </label>
                                 </div>
                             </div>
 
-                            <div class="app_collapse mt-2">
+
+                            <div class="app_collapse">
                                 <div class="app_collapse_header collapse">
                                     <h3>Empresa</h3>
-                                    <span class="icon-minus-circle icon-notext"></span>
+                                    <span class="icon-plus-circle icon-notext"></span>
                                 </div>
 
-                                <div class="app_collapse_content">
+                                <div class="app_collapse_content d-none">
 
                                     <div class="companies_list">
                                         <div class="no-content mb-2">Não foram encontrados registros!</div>
 
+                                        <!--
                                         <div class="companies_list_item mb-2">
                                             <p><b>Razão Social:</b> UpInside Treinamentos LTDA</p>
                                             <p><b>Nome Fantasia:</b> UpInside Treinamentos</p>
@@ -368,6 +278,7 @@
                                             <p><b>CEP:</b> 88048-301 <b>Bairro:</b> Campeche <b>Cidade/Estado:</b>
                                                 Florianópolis/SC</p>
                                         </div>
+                                        -->
                                     </div>
 
                                     <p class="text-right">
@@ -390,7 +301,7 @@
                                         <div class="realty_list">
                                             <div class="realty_list_item mb-1">
                                                 <div class="realty_list_item_actions_stats">
-                                                    <img src="assets/images/realty.jpeg" alt="">
+                                                    <img src="" alt="">
                                                     <ul>
                                                         <li>Venda: R$ 450.000,00</li>
                                                         <li>Aluguel: R$ 2.000,00</li>
@@ -472,22 +383,9 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div id="management" class="d-none">
-                            <div class="label_gc">
-                                <span class="legend">Conceder:</span>
-                                <label class="label">
-                                    <input type="checkbox" name="admin"><span>Administrativo</span>
-                                </label>
-
-                                <label class="label">
-                                    <input type="checkbox" name="client"><span>Cliente</span>
-                                </label>
-                            </div>
-                        </div>
                     </div>
 
-                    <div class="text-right mt-2">
+                    <div class="text-right">
                         <button class="btn btn-large btn-green icon-check-square-o" type="submit">Salvar Alterações
                         </button>
                     </div>
@@ -495,4 +393,22 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('js')
+    <script type="text/javascript">
+        let civilStatus = $('select[name=civil_status]'),
+            spouse = $('div[id=spouse]'),
+            income = $('div[id=income]');
+
+        spouse.hide();
+
+        civilStatus.on('change', function (){
+            if (civilStatus.val() === '1') {
+                spouse.show();
+            } else {
+                $('#spouse').hide()
+            }
+        })
+    </script>
 @endsection
