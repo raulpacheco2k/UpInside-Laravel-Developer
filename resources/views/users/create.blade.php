@@ -59,7 +59,7 @@
                             <div class="label_g2">
                                 <label class="label">
                                     {{ Form::label('gender', 'Género', array_merge(['class' => 'legend'])) }}
-                                    {{ Form::select('gender', \App\Models\Gender::toArray(), null, array_merge(['required'])) }}
+                                    {{ Form::select('gender', \App\Models\Gender::toArray(), null, array_merge(['class' => 'select2'],['required'])) }}
                                 </label>
 
                                 <label class="label">
@@ -97,7 +97,7 @@
                             <div class="label_g2">
                                 <label class="label">
                                     {{ Form::label('civil_status', 'Estado civil', array_merge(['class' => 'legend'])) }}
-                                    {{ Form::select('civil_status', \App\Models\MaritalStatus::toArray(), null, array_merge(['required'])) }}
+                                    {{ Form::select('civil_status', \App\Models\MaritalStatus::toArray(), null, array_merge(['class' => 'select2'], ['required'])) }}
                                 </label>
 
                                 <label class="label">
