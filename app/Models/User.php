@@ -96,13 +96,13 @@ class User extends Authenticatable
      */
     public static $rules = [
         'name' => 'required|min:3|max:255',
-        'gender' => 'required|in:male,female,other',
+        'gender' => 'required|in:' . Gender::TYPES,
         'document' => 'required|min:11', // unique:users
         'i' => 'nullable|min:8|max:12', // unique:users
         'document_secondary_complement' => 'nullable',
-        'date_of_birth' => 'required|date_format:d/m/Y',
+        'date_of_birth' => 'required|date|date_format:Y-m-d',
         'place_of_birth' => 'string',
-        'civil_status' => 'required|in:married,separated,single,divorced,widower',
+        'civil_status' => 'required|in:' . MaritalStatus::TYPES,
         'cover' => 'file|nullable',
         'income' => 'required',
         'telephone' => 'nullable',
@@ -114,10 +114,10 @@ class User extends Authenticatable
         'lessee' => 'required_without:lessor|bool',
 
         // TODO: Criar um modelo para cônjuge
-        'type_of_communion' => 'required_if:civil_status,married,separated|in:Comunhão Universal de Ben,Comunhão Parcial de Bens,Separação Total de Bens,Participação Final de Aquestos',
-        'spouse_document' => 'required_if:civil_status,married',
-        'spouse_occupation' => 'required_if:civil_status,married',
-        'spouse_income' => 'required_if:civil_status,married',
+        'type_of_communion' => 'required_if:civil_status, '. MaritalStatus::MARRIED .  '|in:' . MarriagePropertyRegimes::TYPES,
+        'spouse_document' => 'required_with:type_of_communion',
+        'spouse_occupation' => 'required_with:type_of_communion',
+        'spouse_income' => 'required_with:type_of_communion',
 
         // TODO: Criar um modelo para endereço
         'zipcode' => 'required',
