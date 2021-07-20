@@ -19,6 +19,16 @@
             </div>
         </header>
 
+          @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="dash_content_app_box">
             <div class="nav">
                 <ul class="nav_tabs">
