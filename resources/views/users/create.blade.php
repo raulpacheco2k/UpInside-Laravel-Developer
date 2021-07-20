@@ -128,7 +128,7 @@
                                     <div class="label_g2">
                                         <label class="label">
                                             {{ Form::label('spouse_occupation', 'Profissão', array_merge(['class' => 'legend'])) }}
-                                            {{ Form::text('spouse_occupation', null, array_merge(['class' => 'mask-doc'], ['placeholder' => 'Profissão do cônjuge'])) }}
+                                            {{ Form::text('spouse_occupation', null, array_merge(['placeholder' => 'Profissão do cônjuge'])) }}
                                         </label>
 
                                         <label class="label">
