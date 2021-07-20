@@ -404,7 +404,7 @@
         spouse.hide();
 
         civilStatus.on('change', function (){
-            if (civilStatus.val() === '1') {
+            if (civilStatus.val() === '2') {
                 spouse.show();
             } else {
                 $('#spouse').hide()
