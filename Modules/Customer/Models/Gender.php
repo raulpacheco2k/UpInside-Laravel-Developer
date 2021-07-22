@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Models;
+namespace Modules\Customer\Models;
 
 
 class Gender
