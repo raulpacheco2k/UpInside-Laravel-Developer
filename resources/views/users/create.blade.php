@@ -9,11 +9,11 @@
             <div class="dash_content_app_header_actions">
                 <nav class="dash_content_app_breadcrumb">
                     <ul>
-                        <li><a href="">Dashboard</a></li>
+                        <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
                         <li class="separator icon-angle-right icon-notext"></li>
                         <li><a href="">Clientes</a></li>
                         <li class="separator icon-angle-right icon-notext"></li>
-                        <li><a href="" class="text-orange">Novo Cliente</a></li>
+                        <li><a href="{{ route('customer.create') }}" class="text-orange">Novo Cliente</a></li>
                     </ul>
                 </nav>
             </div>
@@ -43,7 +43,7 @@
                     </li>
                 </ul>
 
-                <form class="app_form" action="{{ route('admin.users.store') }}" method="post" enctype="multipart/form-data">
+                <form class="app_form" action="{{ route('customer.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="nav_tabs_content">
                         <div id="data">
@@ -69,7 +69,7 @@
                             <div class="label_g2">
                                 <label class="label">
                                     {{ Form::label('gender', 'Género', array_merge(['class' => 'legend'])) }}
-                                    {{ Form::select('gender', \App\Models\Gender::toArray(), null, array_merge(['class' => 'select2'],['required'])) }}
+                                    {{ Form::select('gender', \Modules\Customer\Models\Gender::toArray(), null, array_merge(['class' => 'select2'],['required'])) }}
                                 </label>
 
                                 <label class="label">
@@ -107,7 +107,7 @@
                             <div class="label_g2">
                                 <label class="label">
                                     {{ Form::label('civil_status', 'Estado civil', array_merge(['class' => 'legend'])) }}
-                                    {{ Form::select('civil_status', \App\Models\MaritalStatus::toArray(), null, array_merge(['class' => 'select2'], ['required'])) }}
+                                    {{ Form::select('civil_status', \Modules\Customer\Models\MaritalStatus::toArray(), null, array_merge(['class' => 'select2'], ['required'])) }}
                                 </label>
 
                                 <label class="label">
@@ -126,7 +126,7 @@
                                     <div class="label_g2">
                                         <label class="label">
                                             {{ Form::label('type_of_communion', 'Tipo de Comunhão', array_merge(['class' => 'legend'])) }}
-                                            {{ Form::select('type_of_communion', \App\Models\MarriagePropertyRegimes::toArray(), null, array_merge(['class' => 'select2'])) }}
+                                            {{ Form::select('type_of_communion', \Modules\Customer\Models\MarriagePropertyRegimes::toArray(), null, array_merge(['class' => 'select2'])) }}
                                         </label>
 
                                         <label class="label">
@@ -180,43 +180,43 @@
                                     <div class="label_g2">
                                         <label class="label">
                                             {{ Form::label('zipcode', 'CEP', array_merge(['class' => 'legend'])) }}
-                                            {{ Form::text('zipcode', null, array_merge(['class' => 'mask-zipcode zip_code_search'], ['placeholder' => 'CEP'])) }}
+                                            {{ Form::text('address[zipcode]', null, array_merge(['class' => 'mask-zipcode zip_code_search'], ['placeholder' => 'CEP'])) }}
                                         </label>
 
                                             <label class="label">
                                                 {{ Form::label('state', 'Estado', array_merge(['class' => 'legend'])) }}
-                                                {{ Form::text('state', null, array_merge(['class' => 'state'], ['placeholder' => 'Estado'])) }}
+                                                {{ Form::text('address[state]', null, array_merge(['class' => 'state'], ['placeholder' => 'Estado'])) }}
                                             </label>
                                     </div>
 
                                     <div class="label_g2">
                                         <label class="label">
                                             {{ Form::label('city', 'Cidade', array_merge(['class' => 'legend'])) }}
-                                            {{ Form::text('city', null, array_merge(['class' => 'city'], ['placeholder' => 'Cidade'])) }}
+                                            {{ Form::text('address[city]', null, array_merge(['class' => 'city'], ['placeholder' => 'Cidade'])) }}
                                         </label>
 
                                         <label class="label">
                                             {{ Form::label('neighborhood', 'Bairro', array_merge(['class' => 'legend'])) }}
-                                            {{ Form::text('neighborhood', null, array_merge(['class' => 'neighborhood'], ['placeholder' => 'Bairro'])) }}
+                                            {{ Form::text('address[neighborhood]', null, array_merge(['class' => 'neighborhood'], ['placeholder' => 'Bairro'])) }}
                                         </label>
                                     </div>
 
                                     <div class="label_g2">
                                         <label class="label">
                                             {{ Form::label('street', 'Rua', array_merge(['class' => 'legend'])) }}
-                                            {{ Form::text('street', null, array_merge(['class' => 'street'], ['placeholder' => 'Rua'])) }}
+                                            {{ Form::text('address[street]', null, array_merge(['class' => 'street'], ['placeholder' => 'Rua'])) }}
                                         </label>
 
                                         <label class="label">
                                             {{ Form::label('number', 'Número', array_merge(['class' => 'legend'])) }}
-                                            {{ Form::text('number', null, array_merge(['class' => 'number'], ['placeholder' => 'Número'])) }}
+                                            {{ Form::text('address[number]', null, array_merge(['class' => 'number'], ['placeholder' => 'Número'])) }}
                                         </label>
                                     </div>
 
                                     <div class="label_g1">
                                         <label class="label">
                                             {{ Form::label('complement', 'Complemento', array_merge(['class' => 'legend'])) }}
-                                            {{ Form::text('complement', null, array_merge(['class' => 'complement'], ['placeholder' => 'Complemento'])) }}
+                                            {{ Form::text('address[complement]', null, array_merge(['class' => 'complement'], ['placeholder' => 'Complemento'])) }}
                                         </label>
                                     </div>
                                 </div>
