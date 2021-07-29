@@ -43,7 +43,12 @@
                     </li>
                 </ul>
 
-                <form class="app_form" action="{{ route('customer.store') }}" method="post" enctype="multipart/form-data">
+                @dd($customer->address)
+                @if(isset($customer))
+                    {{ Form::model($customer, ['route' => ['customer.update', $customer->id]]) }}
+                @else
+                    <form class="app_form" action="{{ route('customer.store') }}" method="post" enctype="multipart/form-data">
+                @endif
                     @csrf
                     <div class="nav_tabs_content">
                         <div id="data">

@@ -29,10 +29,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $users = $this->customerRepository->all();
+        $customers = $this->customerRepository->all();
 
         return view('users.index')->with([
-            'users' => $users
+            'customers' => $customers
         ]);
     }
 
@@ -74,10 +74,10 @@ class CustomerController extends Controller
      */
     final public function edit(int $id)
     {
-        $user = $this->customerRepository->find($id);
+        $customer = $this->customerRepository->find($id);
 
-        return view('customer::edit')->with([
-            'users' => $user
+        return view('users.create')->with([
+            'customer' => $customer
         ]);
     }
 
