@@ -51,8 +51,8 @@ class Customer extends Model
         'cover' => 'string',
         'occupation' => 'string',
         'income' => 'integer',
-        'telephone' => 'integer',
-        'cell' => 'integer',
+        'telephone' => 'string',
+        'cell' => 'string',
         'lessor' => 'boolean',
         'lessee' => 'boolean',
         'type_of_communion' => 'integer',
@@ -108,6 +108,6 @@ class Customer extends Model
 
     final public function address()
     {
-        $this->hasOne(Address::class);
+        return $this->hasOne(Address::class, 'id', 'address_id');
     }
 }

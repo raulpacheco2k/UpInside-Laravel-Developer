@@ -35,13 +35,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @foreach($customers as $customer)
                         <tr>
-                            <td>{{ $user->id }}</td>
-                            <td><a href="{{ route('customer.edit', $user->id) }}" class="text-orange">{{ $user->name }}</a></td>
-                            <td>{{ $user->document }}</td>
-                            <td><a href="mailto:{{ $user->email}}" class="text-orange">{{ $user->email }}</a></td>
-                            <td>{{ $user->date_of_birth }}</td>
+                            <td>{{ $customer->id }}</td>
+                            <td><a href="{{ route('customer.edit', $customer->id) }}" class="text-orange">{{ $customer->name }}</a></td>
+                            <td>{{ $customer->document }}</td>
+                            <td><a href="mailto:{{ $customer->email}}" class="text-orange">{{ $customer->email }}</a></td>
+                            <td>{{ $customer->date_of_birth }}</td>
                         </tr>
                     @endforeach
                     </tbody>

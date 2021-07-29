@@ -43,9 +43,8 @@
                     </li>
                 </ul>
 
-                @dd($customer->address)
                 @if(isset($customer))
-                    {{ Form::model($customer, ['route' => ['customer.update', $customer->id]]) }}
+                    {{ Form::model($customer, array_merge(['route' => ['customer.update', $customer->id], 'class' => 'app_form'])) }}
                 @else
                     <form class="app_form" action="{{ route('customer.store') }}" method="post" enctype="multipart/form-data">
                 @endif
