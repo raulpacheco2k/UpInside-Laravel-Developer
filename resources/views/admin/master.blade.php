@@ -42,7 +42,7 @@
             <li class="dash_sidebar_nav_item {{ isActive('admin.home') }}">
                 <a class="icon-tachometer" href="{{ route('admin.home') }}">Dashboard</a>
             </li>
-            <li class="dash_sidebar_nav_item {{ isActive('admin.users') }}"><a class="icon-users" href="{{ route('admin.users.index') }}">Clientes</a>
+            <li class="dash_sidebar_nav_item {{ isActive('admin.users') }}"><a class="icon-users" href="{{ route('customer.index') }}">Clientes</a>
                 <ul class="dash_sidebar_nav_submenu">
                     <li class="{{ isActive('customer.index') }}"><a href="{{ route('customer.index') }}">Ver Todos</a></li>
                     <li class=""><a href="dashboard.blade.php?app=companies/index">Empresas</a></li>
