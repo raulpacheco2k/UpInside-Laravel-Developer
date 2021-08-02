@@ -68,23 +68,20 @@ class Customer extends Model
         'complement' => 'string',
     ];
 
-    /**
-     * @var array
-     */
     public static array $rules = [
         'name' => 'required|min:3|max:255',
         'gender' => 'required|in:' . Gender::TYPES,
-        'document' => 'required|min:11', // unique:users
-        'document_secondary' => 'nullable|min:7|max:12', // unique:users
+        'document' => 'required|unique:customers|min:11',
+        'document_secondary' => 'nullable|unique:customers|min:7|max:12',
         'document_secondary_complement' => 'nullable',
         'date_of_birth' => 'required|date|date_format:Y-m-d',
         'place_of_birth' => 'string',
         'civil_status' => 'required|in:' . MaritalStatus::TYPES,
         'cover' => 'file|nullable',
         'income' => 'required',
-        'telephone' => 'nullable',
-        'cell' => 'required',
-        'email' => 'required',
+        'telephone' => 'nullable|unique:customers',
+        'cell' => 'required|unique:customers',
+        'email' => 'required|unique:customers|',
 
         // TODO: Criar um modelo para o tipo de cliente
         'lessor' => 'required_without:lessee|bool',
