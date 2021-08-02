@@ -54,7 +54,7 @@ class CustomerController extends Controller
     {
         $this->customerRepository->create($request->input());
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('customer.index');
     }
 
     /**
