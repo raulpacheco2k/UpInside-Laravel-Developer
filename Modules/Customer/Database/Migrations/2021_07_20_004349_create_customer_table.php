@@ -27,7 +27,7 @@ class CreateCustomerTable extends Migration
             $table->tinyInteger('civil_status');
             $table->string('cover')->nullable();
             $table->string('occupation');
-            $table->double('income', 11, 2);
+            $table->decimal('income', '11', '2');
             $table->string('telephone')->unique();
             $table->string('cell')->unique();
             $table->boolean('lessor')->nullable();
@@ -37,9 +37,6 @@ class CreateCustomerTable extends Migration
             $table->string('spouse_occupation')->nullable();
             $table->double('spouse_income', 11, 2)->nullable();
             $table->tinyInteger('type_of_communion')->nullable();
-
-            $table->unsignedBigInteger('address_id')->nullable();
-            $table->foreign('address_id')->references('id')->on('addresses');
 
             $table->timestamps();
             $table->softDeletes();
@@ -53,6 +50,6 @@ class CreateCustomerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer');
+        Schema::dropIfExists('customers');
     }
 }
