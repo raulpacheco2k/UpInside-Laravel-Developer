@@ -44,7 +44,7 @@ class User extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserStoreRequest $request)
+    public function store(Request $request)
     {
         dd($request->input());
     }
