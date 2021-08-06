@@ -79,7 +79,7 @@ class Customer extends Model
         'place_of_birth' => 'string',
         'civil_status' => 'required|in:' . MaritalStatus::TYPES,
         'cover' => 'file|nullable',
-        'income' => 'required',
+        'income' => 'required|max:9',
         'telephone' => 'nullable|unique:customers',
         'cell' => 'required|unique:customers',
         'email' => 'nullable|unique:customers',
