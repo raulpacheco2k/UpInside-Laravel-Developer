@@ -11,12 +11,12 @@ class CreateCustomerTable extends Migration
      *
      * @return void
      */
-    public function up()
+    final public function up(): void
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();
             $table->tinyInteger('gender');
             $table->string('document')->unique();
@@ -27,7 +27,7 @@ class CreateCustomerTable extends Migration
             $table->tinyInteger('civil_status');
             $table->string('cover')->nullable();
             $table->string('occupation');
-            $table->decimal('income', '11', '2');
+            $table->integer('income');
             $table->string('telephone')->unique();
             $table->string('cell')->unique();
             $table->boolean('lessor')->nullable();
@@ -48,7 +48,7 @@ class CreateCustomerTable extends Migration
      *
      * @return void
      */
-    public function down()
+    final public function down(): void
     {
         Schema::dropIfExists('customers');
     }
