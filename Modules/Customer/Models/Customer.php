@@ -82,7 +82,7 @@ class Customer extends Model
         'income' => 'required|max:9',
         'telephone' => 'nullable|unique:customers',
         'cell' => 'required|unique:customers',
-        'email' => 'nullable|unique:customers',
+        'email' => 'nullable|unique:customers|email',
 
         // TODO: Criar um modelo para o tipo de cliente
         'lessor' => 'required_without:lessee|bool',
@@ -103,6 +103,15 @@ class Customer extends Model
         'address.number' => 'required',
         'address.complement' => 'nullable',
     ];
+
+    public static array $rulesUpdate = [
+        'document' => 'required|min:11|unique:customers,document,',
+        'document_secondary' => 'nullable|min:7|max:12|unique:customers,document_secondary,',
+        'telephone' => 'nullable|unique:customers,telephone,',
+        'cell' => 'required|unique:customers,cell,',
+        'email' => 'nullable|email|unique:customers,email,',
+    ];
+
 
     public static array $filters = [
         'document' => 'digit',

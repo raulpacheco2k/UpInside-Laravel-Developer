@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Modules\Customer\Http\Requests\CustomerRequest;
+use Modules\Customer\Http\Requests\CustomerUpdateRequest;
 use Modules\Customer\Repositories\CustomerRepository;
 use Prettus\Validator\Exceptions\ValidatorException;
 
@@ -84,12 +85,12 @@ class CustomerController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param  CustomerRequest  $request
+     * @param  CustomerUpdateRequest  $request
      * @param  int  $id
      * @return RedirectResponse
      * @throws ValidatorException
      */
-    final public function update(CustomerRequest $request, int $id): RedirectResponse
+    final public function update(CustomerUpdateRequest $request, int $id): RedirectResponse
     {
         $this->customerRepository->update($request->input(), $id);
 

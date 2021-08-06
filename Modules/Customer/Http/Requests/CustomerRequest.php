@@ -19,7 +19,7 @@ class CustomerRequest extends FormRequest
      *
      * @return array
      */
-    final public function rules(): array
+    public function rules(): array
     {
         return Customer::$rules;
     }
