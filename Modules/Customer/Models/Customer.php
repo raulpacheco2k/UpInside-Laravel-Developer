@@ -82,7 +82,7 @@ class Customer extends Model
         'income' => 'required',
         'telephone' => 'nullable|unique:customers',
         'cell' => 'required|unique:customers',
-        'email' => 'required|unique:customers|',
+        'email' => 'nullable|unique:customers',
 
         // TODO: Criar um modelo para o tipo de cliente
         'lessor' => 'required_without:lessee|bool',
