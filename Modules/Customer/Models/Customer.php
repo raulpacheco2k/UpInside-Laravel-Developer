@@ -3,6 +3,7 @@
 namespace Modules\Customer\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Address\Models\Address;
 
 class Customer extends Model
@@ -103,7 +104,22 @@ class Customer extends Model
         'address.complement' => 'nullable',
     ];
 
-    final public function address()
+    public static array $filters = [
+        'document' => 'digit',
+        'income' => 'digit',
+    ];
+
+    final public function getDocumentAttribute(string $value): string
+    {
+        return substr($value, 0, 3) . '.' . substr($value, 3, 3) . '.' . substr($value, 6, 3) . '-' . substr($value, -2);
+    }
+
+    final public function getDateOfBirthAttribute(string $value): string
+    {
+        return date('d/m/Y', strtotime($value));
+    }
+
+    final public function address(): HasOne
     {
         return $this->hasOne(Address::class, 'id', 'address_id');
     }
