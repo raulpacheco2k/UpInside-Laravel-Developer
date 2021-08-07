@@ -35,7 +35,7 @@ class Address extends Model
         'city' => 'capitalize',
         'neighborhood' => 'capitalize',
         'street' => 'capitalize',
-        'number' => ' digit'
+        'number' => 'digit'
     ];
     
     protected static function newFactory()
