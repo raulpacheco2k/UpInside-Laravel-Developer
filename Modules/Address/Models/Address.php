@@ -9,7 +9,24 @@ class Address extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'zipcode',
+        'state',
+        'city',
+        'neighborhood',
+        'street',
+        'number',
+        'complement'
+    ];
+
+    public static array $filters = [
+        'zipcode' => 'digit',
+        'state' => 'capitalize',
+        'city' => 'capitalize',
+        'neighborhood' => 'capitalize',
+        'street' => 'capitalize',
+        'number' => ' digit'
+    ];
     
     protected static function newFactory()
     {
