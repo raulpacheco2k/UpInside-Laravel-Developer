@@ -114,8 +114,13 @@ class Customer extends Model
 
 
     public static array $filters = [
+        'name' => 'capitalize',
+        'place_of_birth' => 'capitalize',
         'document' => 'digit',
+        'document_secondary' => 'digit',
         'income' => 'digit',
+        'spouse_document' => 'digit',
+        'spouse_income' => 'digit'
     ];
 
     final public function getDocumentAttribute(string $value): string
