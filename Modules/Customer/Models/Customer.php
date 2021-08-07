@@ -93,15 +93,6 @@ class Customer extends Model
         'spouse_document' => 'required_if:civil_status, '. MaritalStatus::MARRIED,
         'spouse_occupation' => 'required_if:civil_status, '. MaritalStatus::MARRIED,
         'spouse_income' => 'required_if:civil_status, '. MaritalStatus::MARRIED,
-
-        // TODO: Criar um modelo para endereço
-        'address.zipcode' => 'required',
-        'address.state' => 'required',
-        'address.city' => 'required',
-        'address.neighborhood' => 'required',
-        'address.street' => 'required',
-        'address.number' => 'required',
-        'address.complement' => 'nullable',
     ];
 
     public static array $rulesUpdate = [

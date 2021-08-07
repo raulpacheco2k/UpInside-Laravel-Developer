@@ -19,6 +19,16 @@ class Address extends Model
         'complement'
     ];
 
+    public static array $rules = [
+        'address.zipcode' => 'required',
+        'address.state' => 'required',
+        'address.city' => 'required',
+        'address.neighborhood' => 'required',
+        'address.street' => 'required',
+        'address.number' => 'required',
+        'address.complement' => 'nullable'
+    ];
+
     public static array $filters = [
         'zipcode' => 'digit',
         'state' => 'capitalize',
