@@ -19,7 +19,7 @@ class CreateCustomerTable extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();
             $table->tinyInteger('gender');
-            $table->string('document')->unique();
+            $table->string('document', 11)->unique();
             $table->integer('document_secondary')->unique();
             $table->string('document_secondary_complement');
             $table->date('date_of_birth');
@@ -33,7 +33,7 @@ class CreateCustomerTable extends Migration
             $table->boolean('lessor')->nullable();
             $table->boolean('lessee')->nullable();
 
-            $table->integer('spouse_document')->nullable();
+            $table->string('spouse_document', 11)->nullable();
             $table->string('spouse_occupation')->nullable();
             $table->double('spouse_income', 11, 2)->nullable();
             $table->tinyInteger('type_of_communion')->nullable();
