@@ -92,6 +92,13 @@ class CustomerController extends Controller
      */
     final public function update(CustomerUpdateRequest $request, int $id): RedirectResponse
     {
+        $user = $this->customerRepository->find($id);
+
+        if ($request->file('cover')) {
+            Storage::delete( $user->cover );
+            $request['cover'] = $request->file('cover')->store(CustomerModule::MODULE_SLUG);
+        }
+
         $this->customerRepository->update($request->input(), $id);
 
         return redirect()->route('customer.index');

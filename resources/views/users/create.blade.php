@@ -44,7 +44,7 @@
                 </ul>
 
                 @if(isset($customer))
-                    {{ Form::model($customer, array_merge(['route' => ['customer.update', $customer->id], 'class' => 'app_form'])) }}
+                    {{ Form::model($customer, array_merge(['route' => ['customer.update', $customer->id], 'enctype' => 'multipart/form-data', 'class' => 'app_form'])) }}
                     @method('PATCH')
                 @else
                     <form class="app_form" action="{{ route('customer.store') }}" method="post" enctype="multipart/form-data">
