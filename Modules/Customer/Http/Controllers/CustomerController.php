@@ -76,7 +76,7 @@ class CustomerController extends Controller
      */
     final public function edit(int $id): Renderable
     {
-        $customer = $this->customerRepository->find($id);
+        $customer = $this->customerRepository->with('address')->find($id);
 
         return view('users.create')->with([
             'customer' => $customer
