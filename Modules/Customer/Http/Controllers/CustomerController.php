@@ -5,23 +5,23 @@ namespace Modules\Customer\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
+use Modules\Address\Repositories\AddressRepository;
+use Modules\Customer\Config\CustomerModule;
 use Modules\Customer\Http\Requests\CustomerRequest;
 use Modules\Customer\Http\Requests\CustomerUpdateRequest;
 use Modules\Customer\Repositories\CustomerRepository;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Storage;
 
 class CustomerController extends Controller
 {
     private CustomerRepository $customerRepository;
+    private AddressRepository $addressRepository;
 
-    /**
-     * CustomerController constructor.
-     *
-     * @param  CustomerRepository  $customerRepository
-     */
-    public function __construct(CustomerRepository $customerRepository)
+    public function __construct(CustomerRepository $customerRepository, AddressRepository $addressRepository)
     {
         $this->customerRepository = $customerRepository;
+        $this->addressRepository = $addressRepository;
     }
 
     /**
@@ -54,6 +54,12 @@ class CustomerController extends Controller
      */
     final public function store(CustomerRequest $request): RedirectResponse
     {
+        $address = $this->addressRepository->create($request->address);
+
+        if ($request->file('cover')) {
+            $request['cover'] = $request->file('cover')->store(CustomerModule::MODULE_SLUG);
+        }
+
         $this->customerRepository->create($request->input());
 
         return redirect()->route('customer.index');
