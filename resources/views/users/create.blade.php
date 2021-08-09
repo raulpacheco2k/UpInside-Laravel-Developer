@@ -118,6 +118,7 @@
                                 <label class="label">
                                     {{ Form::label('cover', 'Foto', array_merge(['class' => 'legend'])) }}
                                     {{ Form::file('cover') }}
+                                    <img src="{{ Storage::url( $customer->cover ?? '' )}}" width="100px">
                                 </label>
                             </div>
 
