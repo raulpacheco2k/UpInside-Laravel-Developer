@@ -2,7 +2,7 @@
 
 namespace Modules\Companies\Repositories;
 
-use Modules\Companies\Models\Companies;
+use Modules\Companies\Models\Company;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
@@ -20,7 +20,7 @@ class CompaniesRepository extends BaseRepository
      */
     final public function model(): string
     {
-        return Companies::class;
+        return Company::class;
     }
 
     /**
