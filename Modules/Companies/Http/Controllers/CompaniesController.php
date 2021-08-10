@@ -3,37 +3,62 @@
 namespace Modules\Companies\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Companies\Repositories\CompaniesRepository;
+use Modules\Customer\Repositories\CustomerRepository;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 class CompaniesController extends Controller
 {
+
+    private CompaniesRepository $companiesRepository;
+    private CustomerRepository $customerRepository;
+
+    public function __construct(CompaniesRepository $companiesRepository, CustomerRepository $customerRepository)
+    {
+        $this->companiesRepository = $companiesRepository;
+        $this->customerRepository = $customerRepository;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    final public function index(): Renderable
     {
-        return view('companies::index');
+        $companies = $this->companiesRepository->all();
+
+        return view('companies::index')->with([
+            'companies' => $companies
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create()
+    final public function create(): Renderable
     {
-        return view('companies::create');
+        $customers = $this->customerRepository->pluck('name', 'id');
+
+        return view('companies::create')->with([
+            'customers' => $customers
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
+     * @param  Request  $request
+     * @return RedirectResponse
+     * @throws ValidatorException
      */
-    public function store(Request $request)
+    final public function store(Request $request): RedirectResponse
     {
-        //
+        $this->companiesRepository->create($request->input());
+
+        return redirect()->route('customer.index');
     }
 
     /**
@@ -41,9 +66,13 @@ class CompaniesController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id)
+    final public function show(int $id): Renderable
     {
-        return view('companies::show');
+        $company = $this->companiesRepository->find($id);
+
+        return view('companies::show')->with([
+            'company' => $company
+        ]);
     }
 
     /**
@@ -51,29 +80,39 @@ class CompaniesController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    final public function edit(int $id): Renderable
     {
-        return view('companies::edit');
+        $company = $this->companiesRepository->find($id);
+
+        return view('companies::edit')->with([
+            'company' => $company
+        ]);
+
     }
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
+     * @param  Request  $request
+     * @param  int  $id
+     * @return RedirectResponse
+     * @throws ValidatorException
      */
-    public function update(Request $request, $id)
+    final public function update(Request $request, int $id): RedirectResponse
     {
-        //
+        $this->companiesRepository->update($request->input(), $id);
+
+        return redirect()->route('companies.index');
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
+     * @param  int  $id
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    final public function destroy(int $id): RedirectResponse
     {
-        //
+        $this->companiesRepository->delete($id);
+
+        return redirect()->route('customer.index');
     }
 }

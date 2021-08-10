@@ -18,7 +18,7 @@ class CreateCompaniesTable extends Migration
             $table->string('corporate_name');
             $table->string('fantasy_name');
             $table->string('document_cnpj', 14);
-            $table->string('state_registration');
+            $table->string('state_registration')->nullable();
             $table->timestamps();
         });
     }
