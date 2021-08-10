@@ -11,6 +11,4 @@
 |
 */
 
-Route::prefix('companies')->group(function() {
-    Route::get('/', 'CompaniesController@index');
-});
+Route::resource('/companies', '\Modules\Companies\Http\Controllers\CompaniesController');

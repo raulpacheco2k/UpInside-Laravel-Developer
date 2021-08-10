@@ -11,6 +11,4 @@
 |
 */
 
-Route::prefix('')->group(function() {
-    Route::resource('/customer', '\Modules\Customer\Http\Controllers\CustomerController');
-});
+Route::resource('/customer', '\Modules\Customer\Http\Controllers\CustomerController');
