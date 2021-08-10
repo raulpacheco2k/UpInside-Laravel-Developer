@@ -44,26 +44,26 @@
 
                         <label class="label">
                             {{ Form::label('corporate_name', 'Razão Social', array_merge(['class' => 'legend'])) }}
-                            {{ Form::text('corporate_name', null, array_merge(['class' => 'form-control'], ['placeholder' => 'Razão Social', 'required'])) }}
+                            {{ Form::text('corporate_name', null, array_merge(['placeholder' => 'Razão Social', 'required'])) }}
                             <x-validate-field field="corporate_name"/>
                         </label>
 
                         <label class="label">
                             {{ Form::label('fantasy_name', 'Nome Fantasia', array_merge(['class' => 'legend'])) }}
-                            {{ Form::text('fantasy_name', null, array_merge(['class' => 'form-control'], ['placeholder' => 'Nome Fantasia', 'required'])) }}
+                            {{ Form::text('fantasy_name', null, array_merge(['placeholder' => 'Nome Fantasia', 'required'])) }}
                             <x-validate-field field="fantasy_name"/>
                         </label>
 
                         <div class="label_g2">
                             <label class="label">
                                 {{ Form::label('document_cnpj', 'CNPJ', array_merge(['class' => 'legend'])) }}
-                                {{ Form::text('document_cnpj', null, array_merge(['class' => 'form-control'], ['placeholder' => 'CNPJ', 'required'])) }}
+                                {{ Form::tel('document_cnpj', null, array_merge(['class' => 'mask-cnpj'], ['placeholder' => 'CNPJ', 'required'])) }}
                                 <x-validate-field field="document_cnpj"/>
                             </label>
 
                             <label class="label">
                                 {{ Form::label('state_registration', 'Inscrição Estadual', array_merge(['class' => 'legend'])) }}
-                                {{ Form::text('state_registration', null, array_merge(['class' => 'form-control'], ['placeholder' => 'Inscrição Estadual', 'required'])) }}
+                                {{ Form::text('state_registration', null, array_merge(['placeholder' => 'Inscrição Estadual', 'required'])) }}
                                 <x-validate-field field="state_registration"/>
                             </label>
                         </div>
