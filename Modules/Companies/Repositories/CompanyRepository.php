@@ -7,11 +7,11 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
- * Class CompaniesRepository.
+ * Class CompanyRepository.
  *
  * @package namespace App\Repositories;
  */
-class CompaniesRepository extends BaseRepository
+class CompanyRepository extends BaseRepository
 {
     /**
      * Specify Model class name
