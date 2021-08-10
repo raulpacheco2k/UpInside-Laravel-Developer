@@ -14,11 +14,11 @@
                         <li class="separator icon-angle-right icon-notext"></li>
                         <li><a href="{{ route('customer.index') }}">Clientes</a></li>
                         <li class="separator icon-angle-right icon-notext"></li>
-                        <li><a href="{{ route('companies.index') }}" class="text-orange">Empresas</a></li>
+                        <li><a href="{{ route('company.index') }}" class="text-orange">Empresas</a></li>
                     </ul>
                 </nav>
 
-                <a href="{{ route('companies.create') }}" class="btn btn-orange icon-building-o ml-1">Criar Empresa</a>
+                <a href="{{ route('company.create') }}" class="btn btn-orange icon-building-o ml-1">Criar Empresa</a>
                 <button class="btn btn-green icon-search icon-notext ml-1 search_open"></button>
             </div>
         </header>

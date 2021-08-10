@@ -13,9 +13,9 @@
                         <li class="separator icon-angle-right icon-notext"></li>
                         <li><a href="{{ route('customer.index') }}">Clientes</a></li>
                         <li class="separator icon-angle-right icon-notext"></li>
-                        <li><a href="{{ route('companies.index') }}">Empresas</a></li>
+                        <li><a href="{{ route('company.index') }}">Empresas</a></li>
                         <li class="separator icon-angle-right icon-notext"></li>
-                        <li><a href="{{ route('companies.create') }}" class="text-orange">Nova empresa</a></li>
+                        <li><a href="{{ route('company.create') }}" class="text-orange">Nova empresa</a></li>
                     </ul>
                 </nav>
             </div>
@@ -27,7 +27,7 @@
                     {{ Form::model($entity, array_merge(['route' => ['companies.update', $entity->id], 'class' => 'app_form'])) }}
                     @method('PATCH')
                 @else
-                    <form class="app_form" action="{{ route('companies.store') }}" method="post">
+                    <form class="app_form" action="{{ route('company.store') }}" method="post">
                         @endif
                         @csrf
 

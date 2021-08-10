@@ -107,7 +107,7 @@ class CompanyController extends Controller
     {
         $this->companiesRepository->update($request->input(), $id);
 
-        return redirect()->route('companies.index');
+        return redirect()->route('company.index');
     }
 
     /**

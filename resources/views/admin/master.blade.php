@@ -45,7 +45,7 @@
             <li class="dash_sidebar_nav_item {{ isActive('customer')}} {{isActive('companies')}}"><a class="icon-users" href="{{ route('customer.index') }}">Clientes</a>
                 <ul class="dash_sidebar_nav_submenu">
                     <li class="{{ isActive('customer.index') }}"><a href="{{ route('customer.index') }}">Clientes</a></li>
-                    <li class="{{ isActive('companies.index') }}"><a href="{{ route('companies.index') }}">Empresas</a></li>
+                    <li class="{{ isActive('company.index') }}"><a href="{{ route('company.index') }}">Empresas</a></li>
                 </ul>
             </li>
             <li class="dash_sidebar_nav_item"><a class="icon-home" href="dashboard.blade.php?app=properties/index">Imóveis</a>
