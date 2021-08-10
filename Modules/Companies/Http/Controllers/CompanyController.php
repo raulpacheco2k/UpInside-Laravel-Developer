@@ -54,7 +54,7 @@ class CompaniesController extends Controller
      * @return RedirectResponse
      * @throws ValidatorException
      */
-    final public function store(Request $request): RedirectResponse
+    final public function store(CompanyRequest $request): RedirectResponse
     {
         $this->companiesRepository->create($request->input());
 
