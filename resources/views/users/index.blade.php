@@ -11,6 +11,8 @@
                     <ul>
                         <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
                         <li class="separator icon-angle-right icon-notext"></li>
+                        <li><a href="{{ route('customer.index') }}">Clientes</a></li>
+                        <li class="separator icon-angle-right icon-notext"></li>
                         <li><a href="{{ route('customer.index') }}" class="text-orange">Clientes</a></li>
                     </ul>
                 </nav>

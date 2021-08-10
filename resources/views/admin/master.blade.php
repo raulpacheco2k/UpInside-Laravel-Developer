@@ -42,12 +42,10 @@
             <li class="dash_sidebar_nav_item {{ isActive('admin.home') }}">
                 <a class="icon-tachometer" href="{{ route('admin.home') }}">Dashboard</a>
             </li>
-            <li class="dash_sidebar_nav_item {{ isActive('admin.users') }}"><a class="icon-users" href="{{ route('customer.index') }}">Clientes</a>
+            <li class="dash_sidebar_nav_item {{ isActive('customer')}} {{isActive('companies')}}"><a class="icon-users" href="{{ route('customer.index') }}">Clientes</a>
                 <ul class="dash_sidebar_nav_submenu">
-                    <li class="{{ isActive('customer.index') }}"><a href="{{ route('customer.index') }}">Ver Todos</a></li>
-                    <li class=""><a href="dashboard.blade.php?app=companies/index">Empresas</a></li>
-                    <li class="{{ isActive('admin.users.team') }}"><a href={{ route('admin.users.team') }}>Time</a></li>
-                    <li class="{{ isActive('admin.users.create') }}"><a href="{{ route('admin.users.create') }}">Criar Novo</a></li>
+                    <li class="{{ isActive('customer.index') }}"><a href="{{ route('customer.index') }}">Clientes</a></li>
+                    <li class="{{ isActive('companies.index') }}"><a href="{{ route('companies.index') }}">Empresas</a></li>
                 </ul>
             </li>
             <li class="dash_sidebar_nav_item"><a class="icon-home" href="dashboard.blade.php?app=properties/index">Imóveis</a>
