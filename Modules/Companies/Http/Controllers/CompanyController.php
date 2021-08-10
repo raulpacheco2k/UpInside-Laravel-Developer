@@ -50,12 +50,14 @@ class CompaniesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param  Request  $request
+     * @param  CompanyRequest  $request
      * @return RedirectResponse
      * @throws ValidatorException
      */
     final public function store(CompanyRequest $request): RedirectResponse
     {
+        $this->addressRepository->create($request->address);
+
         $this->companiesRepository->create($request->input());
 
         return redirect()->route('customer.index');
