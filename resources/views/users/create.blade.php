@@ -405,7 +405,7 @@
                         <button class="btn btn-large btn-green icon-check-square-o" type="submit">Salvar Alterações
                         </button>
                     </div>
-                </form>
+                {{ Form::close() }}
             </div>
         </div>
     </section>
