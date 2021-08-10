@@ -6,6 +6,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Address\Repositories\AddressRepository;
+use Modules\Companies\Http\Requests\CompanyRequest;
 use Modules\Companies\Repositories\CompaniesRepository;
 use Modules\Customer\Repositories\CustomerRepository;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -15,11 +17,13 @@ class CompaniesController extends Controller
 
     private CompaniesRepository $companiesRepository;
     private CustomerRepository $customerRepository;
+    private AddressRepository $addressRepository;
 
     public function __construct(CompaniesRepository $companiesRepository, CustomerRepository $customerRepository)
     {
         $this->companiesRepository = $companiesRepository;
         $this->customerRepository = $customerRepository;
+        $this->addressRepository = $addressRepository;
     }
 
     /**
