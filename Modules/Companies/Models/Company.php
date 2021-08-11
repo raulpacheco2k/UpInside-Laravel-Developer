@@ -18,7 +18,8 @@ class Company extends Model
         'corporate_name',
         'fantasy_name',
         'document_cnpj',
-        'state_registration'
+        'state_registration',
+        'address_id'
     ];
 
     protected $casts = [
