@@ -65,7 +65,7 @@ class CompanyController extends Controller
 
         $this->companiesRepository->create($request->input());
 
-        return redirect()->route('customer.index');
+        return redirect()->route('company.index');
     }
 
     /**
