@@ -20,4 +20,10 @@ class AddressRepository extends BaseRepository
         return parent::create($attributes->sanitize());
     }
 
+    final public function update(array $attributes, $id)
+    {
+        $attributes = new Sanitizer($attributes, Address::$filters);
+
+        return parent::update($attributes->sanitize(), $id);
+    }
 }
