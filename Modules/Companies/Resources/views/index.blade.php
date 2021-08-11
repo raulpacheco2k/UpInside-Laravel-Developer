@@ -40,11 +40,11 @@
                     <tbody>
                     @foreach($companies as $company)
                         <tr>
-                            <td><a href="" class="text-orange">UpInside Treinamentos LTDA</a></td>
-                            <td>{{ $company->alias_name }}</td>
-                            <td>12.345.678/0001-00</td>
-                            <td>123123</td>
-                            <td><a href="" class="text-orange">Robson V. Leite</a></td>
+                            <td><a href="{{ route('company.edit', $company->id ) }}" class="text-orange">{{ $company->corporate_name }}</a></td>
+                            <td>{{ $company->fantasy_name }}</td>
+                            <td>{{ $company->document_cnpj }}</td>
+                            <td>{{ $company->state_registration }}</td>
+                            <td><a href="" class="text-orange">{{ $company->customer->name }}</a></td>
                         </tr>
                     @endforeach
                     </tbody>

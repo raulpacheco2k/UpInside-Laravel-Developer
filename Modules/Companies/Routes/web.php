@@ -11,4 +11,4 @@
 |
 */
 
-Route::resource('/companies', '\Modules\Companies\Http\Controllers\CompanyController');
+Route::resource('company', '\Modules\Companies\Http\Controllers\CompanyController');

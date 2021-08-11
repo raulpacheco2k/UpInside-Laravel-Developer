@@ -39,10 +39,10 @@ class Company extends Model
 
     public static array $rulesUpdate = [
         'customer_id' => 'integer|required',
-        'corporate_name' => 'string|required|unique:companies',
-        'fantasy_name' => 'string|required|unique:companies',
-        'document_cnpj' => 'integer|required|unique:companies',
-        'state_registration' => 'string|unique:companies'
+        'corporate_name' => 'string|required|unique:companies,corporate_name,',
+        'fantasy_name' => 'string|required|unique:companies,fantasy_name,',
+        'document_cnpj' => 'integer|required|unique:companies,document_cnpj,',
+        'state_registration' => 'string|unique:companies,state_registration,'
     ];
 
     public static array $filters = [
@@ -57,6 +57,11 @@ class Company extends Model
 
     final public function customer(): BelongsTo
     {
-        return $this->belongsTo(Customer::class, 'id', 'customer_id');
+        return $this->belongsTo(Customer::class);
+    }
+
+    final public function getDocumentCNPJAttribute(string $value): string
+    {
+        return substr($value, 0, 2) . "." . substr($value, 2, 3) . "." . substr($value, 5, 3) . "/" . substr($value, 8, 4) . "-" . substr($value, -2);
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Address\Repositories\AddressRepository;
 use Modules\Companies\Http\Requests\CompanyRequest;
+use Modules\Companies\Http\Requests\CompanyUpdateRequest;
 use Modules\Companies\Repositories\CompanyRepository;
 use Modules\Customer\Repositories\CustomerRepository;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -89,21 +90,23 @@ class CompanyController extends Controller
     final public function edit(int $id): Renderable
     {
         $company = $this->companiesRepository->find($id);
+        $customers = $this->customerRepository->pluck('name', 'id');
 
-        return view('companies::edit')->with([
-            'company' => $company
+        return view('companies::create')->with([
+            'company' => $company,
+            'customers' => $customers
         ]);
 
     }
 
     /**
      * Update the specified resource in storage.
-     * @param  Request  $request
+     * @param  CompanyUpdateRequest  $request
      * @param  int  $id
      * @return RedirectResponse
      * @throws ValidatorException
      */
-    final public function update(Request $request, int $id): RedirectResponse
+    final public function update(CompanyUpdateRequest $request, int $id): RedirectResponse
     {
         $this->companiesRepository->update($request->input(), $id);
 

@@ -23,8 +23,8 @@
 
         <div class="dash_content_app_box">
             <div class="dash_content_app_box_stage">
-                @if(isset($entity))
-                    {{ Form::model($entity, array_merge(['route' => ['companies.update', $entity->id], 'class' => 'app_form'])) }}
+                @if(isset($company))
+                    {{ Form::model($company, array_merge(['route' => ['company.update', $company->id], 'class' => 'app_form'])) }}
                     @method('PATCH')
                 @else
                     <form class="app_form" action="{{ route('company.store') }}" method="post">

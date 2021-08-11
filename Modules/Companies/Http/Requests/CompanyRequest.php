@@ -15,7 +15,7 @@ class CompanyRequest extends FormRequest
      *
      * @return array
      */
-    final public function rules(): array
+    public function rules(): array
     {
         return Company::$rules;
     }
