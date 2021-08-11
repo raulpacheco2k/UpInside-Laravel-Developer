@@ -20,6 +20,11 @@ class CompanyController extends Controller
     private CustomerRepository $customerRepository;
     private AddressRepository $addressRepository;
 
+    /**
+     * @param  CompanyRepository  $companiesRepository
+     * @param  CustomerRepository  $customerRepository
+     * @param  AddressRepository  $addressRepository
+     */
     public function __construct(CompanyRepository $companiesRepository, CustomerRepository $customerRepository, AddressRepository $addressRepository)
     {
         $this->companiesRepository = $companiesRepository;
@@ -64,7 +69,6 @@ class CompanyController extends Controller
         $address = $this->addressRepository->create($request->address);
 
         $request['address_id'] = $address->id;
-
 
         $this->companiesRepository->create($request->input());
 
@@ -111,6 +115,9 @@ class CompanyController extends Controller
      */
     final public function update(CompanyUpdateRequest $request, int $id): RedirectResponse
     {
+        $company = $this->companiesRepository->find($id);
+
+        $this->addressRepository->update($request->address, $company->address->id);
         $this->companiesRepository->update($request->input(), $id);
 
         return redirect()->route('company.index');
