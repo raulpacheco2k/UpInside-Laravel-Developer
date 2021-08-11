@@ -36,7 +36,7 @@
                             {{ Form::select('customer_id', $customers, null, array_merge(['class' => 'select2'],['required'])) }}
 
                             <p style="margin-top: 4px;">
-                                <a href="{{ route('customer.create') }}" class="text-orange icon-link"
+                                <a href="{{ (isset($company)) ? route('customer.edit', $company->customer->id ) : route('customer.create') }}" class="text-orange icon-link"
                                    style="font-size: .8em;" target="_blank">Acessar
                                     Cadastro</a>
                             </p>

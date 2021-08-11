@@ -44,7 +44,7 @@
                             <td>{{ $company->fantasy_name }}</td>
                             <td>{{ $company->document_cnpj }}</td>
                             <td>{{ $company->state_registration }}</td>
-                            <td><a href="" class="text-orange">{{ $company->customer->name }}</a></td>
+                            <td><a href="{{ route('customer.edit', $company->customer->id ) }}" class="text-orange">{{ $company->customer->name }}</a></td>
                         </tr>
                     @endforeach
                     </tbody>
