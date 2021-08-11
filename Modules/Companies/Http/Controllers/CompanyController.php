@@ -61,7 +61,10 @@ class CompanyController extends Controller
      */
     final public function store(CompanyRequest $request): RedirectResponse
     {
-        $this->addressRepository->create($request->address);
+        $address = $this->addressRepository->create($request->address);
+
+        $request['address_id'] = $address->id;
+
 
         $this->companiesRepository->create($request->input());
 

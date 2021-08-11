@@ -56,6 +56,8 @@ class CustomerController extends Controller
     {
         $address = $this->addressRepository->create($request->address);
 
+        $request['address_id'] = $address->id;
+
         if ($request->file('cover')) {
             $request['cover'] = $request->file('cover')->store(CustomerModule::MODULE_SLUG);
         }

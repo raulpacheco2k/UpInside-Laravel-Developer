@@ -17,7 +17,7 @@ class AddressRepository extends BaseRepository
     {
         $attributes = new Sanitizer($attributes, Address::$filters);
 
-       parent::create($attributes->sanitize());
+        return parent::create($attributes->sanitize());
     }
 
 }
