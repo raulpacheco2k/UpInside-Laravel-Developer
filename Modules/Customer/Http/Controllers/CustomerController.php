@@ -101,6 +101,7 @@ class CustomerController extends Controller
     final public function update(CustomerUpdateRequest $request, int $id): RedirectResponse
     {
         $user = $this->customerRepository->find($id);
+        $this->addressRepository->update($request->address, $user->address->id);
 
         if ($request->file('cover')) {
             Storage::delete( $user->cover );
