@@ -22,6 +22,8 @@ class CreateAddressTable extends Migration
             $table->string('street');
             $table->integer('number');
             $table->string('complement')->nullable();
+            $table->bigInteger('longitude')->nullable();
+            $table->bigInteger('latitude')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
