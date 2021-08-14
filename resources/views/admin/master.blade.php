@@ -48,10 +48,10 @@
                     <li class="{{ isActive('company.index') }}"><a href="{{ route('company.index') }}">Empresas</a></li>
                 </ul>
             </li>
-            <li class="dash_sidebar_nav_item"><a class="icon-home" href="dashboard.blade.php?app=properties/index">Imóveis</a>
+            <li class="dash_sidebar_nav_item"><a class="icon-home" href="{{ route('properties.index') }}">Imóveis</a>
                 <ul class="dash_sidebar_nav_submenu">
-                    <li class=""><a href="dashboard.blade.php?app=properties/index">Ver Todos</a></li>
-                    <li class=""><a href="dashboard.blade.php?app=properties/create">Criar Novo</a></li>
+                    <li class=""><a href="{{ route('properties.index') }}">Ver Todos</a></li>
+                    <li class=""><a href="{{ route('properties.create') }}">Criar Novo</a></li>
                 </ul>
             </li>
             <li class="dash_sidebar_nav_item"><a class="icon-file-text" href="dashboard.blade.php?app=contracts/index">Contratos</a>
@@ -92,6 +92,7 @@
 
 
 <script src="{{ asset(mix('assets/admin/js/jquery.min.js')) }}"></script>
+<script src="{{ asset('assets/admin/js/tinymce/tinymce.min.js') }}"></script>
 <script src="{{ asset(mix('assets/admin/js/libs.js')) }}"></script>
 <script src="{{ asset(mix('assets/admin/js/scripts.js')) }}"></script>
 

@@ -1,29 +1,32 @@
-<section class="dash_content_app">
+@extends('admin.master')
 
-    <header class="dash_content_app_header">
-        <h2 class="icon-search">Filtro</h2>
+@section('content')
+    <section class="dash_content_app">
 
-        <div class="dash_content_app_header_actions">
-            <nav class="dash_content_app_breadcrumb">
-                <ul>
-                    <li><a href="">Dashboard</a></li>
-                    <li class="separator icon-angle-right icon-notext"></li>
-                    <li><a href="">Imóveis</a></li>
-                    <li class="separator icon-angle-right icon-notext"></li>
-                    <li><a href="" class="text-orange">Filtro</a></li>
-                </ul>
-            </nav>
+        <header class="dash_content_app_header">
+            <h2 class="icon-search">Filtro</h2>
 
-            <a href="dashboard.php?app=properties/create" class="btn btn-orange icon-home ml-1">Criar Imóvel</a>
-            <button class="btn btn-green icon-search icon-notext ml-1 search_open"></button>
-        </div>
-    </header>
+            <div class="dash_content_app_header_actions">
+                <nav class="dash_content_app_breadcrumb">
+                    <ul>
+                        <li><a href="">Dashboard</a></li>
+                        <li class="separator icon-angle-right icon-notext"></li>
+                        <li><a href="">Imóveis</a></li>
+                        <li class="separator icon-angle-right icon-notext"></li>
+                        <li><a href="" class="text-orange">Filtro</a></li>
+                    </ul>
+                </nav>
 
-    <?php include('filter.php'); ?>
+                <a href="{{ route('properties.create') }}" class="btn btn-orange icon-home ml-1">Criar Imóvel</a>
+                <button class="btn btn-green icon-search icon-notext ml-1 search_open"></button>
+            </div>
+        </header>
 
-    <div class="dash_content_app_box">
-        <div class="dash_content_app_box_stage">
-            <div class="realty_list">
+        @include('properties::filter')
+
+        <div class="dash_content_app_box">
+            <div class="dash_content_app_box_stage">
+                <div class="realty_list">
                     <div class="realty_list_item mt-1 mb-1">
                         <div class="realty_list_item_actions_stats">
                             <img src="assets/images/realty.jpeg" alt="">
@@ -88,7 +91,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+@endsection()
