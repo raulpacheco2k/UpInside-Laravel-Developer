@@ -28,7 +28,6 @@ mix
     ], 'public/assets/admin/js/jquery.min.js')
 
     .scripts([
-        'resources/views/assets/js/tinymce/tinymce.min.js',
         'resources/views/assets/js/datatables/js/jquery.dataTables.min.js',
         'resources/views/assets/js/datatables/js/dataTables.responsive.min.js',
         'resources/views/assets/js/select2/js/select2.min.js',
