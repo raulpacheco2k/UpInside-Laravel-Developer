@@ -23,7 +23,7 @@ class Gender
 
     final public static function getLabel(int $value): string
     {
-        return array_search($value, self::labels(), true);
+        return self::labels()[$value];
     }
 
     final public static function toArray(): array
