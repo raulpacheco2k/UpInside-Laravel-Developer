@@ -38,59 +38,32 @@
                     </li>
                 </ul>
 
-                <form action="" method="post" class="app_form" enctype="multipart/form-data">
+                {{ Form::open(array_merge(['route' => 'properties.store'], ['class' => 'app_form', 'enctype' => 'multipart/form-data'])) }}
 
                     <div class="nav_tabs_content">
                         <div id="data">
                             <div class="label_gc">
                                 <span class="legend">Finalidade:</span>
                                 <label class="label">
-                                    <input type="checkbox" name="sale"><span>Venda</span>
+                                    <input type="checkbox" value="1" name="sale"><span>Venda</span>
                                 </label>
 
                                 <label class="label">
-                                    <input type="checkbox" name="rent"><span>Locação</span>
+                                    <input type="checkbox" value="1" name="rent"><span>Locação</span>
                                 </label>
                             </div>
 
                             <div class="label_g2">
                                 <label class="label">
-                                    <span class="legend">Categoria:</span>
-                                    <select name="category" class="select2">
-                                        <option value="residential_property">Imóvel Residencial</option>
-                                        <option value="commercial_industrial">Comercial/Industrial</option>
-                                        <option value="terrain">Terreno</option>
-                                    </select>
+                                    <span class="legend">Tipo:</span>
+                                    {{ Form::select('type', $propertyTypes, null, array_merge(['class' => 'select2'],['required'])) }}
                                 </label>
 
                                 <label class="label">
-                                    <span class="legend">Tipo:</span>
-                                    <select name="type" class="select2">
-                                        <optgroup label="Imóvel Residencial">
-                                            <option value="home">Casa</option>
-                                            <option value="roof">Cobertura</option>
-                                            <option value="apartment">Apartamento</option>
-                                            <option value="studio">Studio</option>
-                                            <option value="kitnet">Kitnet</option>
-                                        </optgroup>
-                                        <optgroup label="Comercial/Industrial">
-                                            <option value="commercial_room">Sala Comercial</option>
-                                            <option value="deposit_shed">Depósito/Galpão</option>
-                                            <option value="commercial_point">Ponto Comercial</option>
-                                        </optgroup>
-                                        <optgroup label="Terreno">
-                                            <option value="terrain">Terreno</option>
-                                        </optgroup>
-                                    </select>
+                                    <span class="legend">Proprietário:</span>
+                                        {{ Form::select('locator_id', $customers, null, ['class' => 'select2', 'required']) }}
                                 </label>
                             </div>
-
-                            <label class="label">
-                                <span class="legend">Proprietário:</span>
-                                <select name="user" class="select2">
-                                    <option value="">Nome (documento)</option>
-                                </select>
-                            </label>
 
                             <div class="app_collapse">
                                 <div class="app_collapse_header mt-2 collapse">
@@ -101,25 +74,25 @@
                                 <div class="app_collapse_content d-none">
                                     <div class="label_g2">
                                         <label class="label">
-                                            <span class="legend">Valor de Venda:</span>
-                                            <input type="tel" name="sale_price" class="mask-money" value=""/>
+                                            {{ Form::label('sale_price', 'Valor de Venda', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::tel('sale_price', null, array_merge(['class' => 'mask-money'], ['placeholder' => 'R$ 0,00'])) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">Valor de Locação:</span>
-                                            <input type="tel" name="rent_price" class="mask-money" value=""/>
+                                            {{ Form::label('rent_price', 'Valor de Locação', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::tel('rent_price', null, array_merge(['class' => 'mask-money'], ['placeholder' => 'R$ 0,00'])) }}
                                         </label>
                                     </div>
 
                                     <div class="label_g2">
                                         <label class="label">
-                                            <span class="legend">IPTU:</span>
-                                            <input type="tel" name="tribute" class="mask-money" value=""/>
+                                            {{ Form::label('iptu', 'IPTU', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::tel('iptu', null, array_merge(['class' => 'mask-money'], ['placeholder' => 'R$ 0,00'])) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">Condomínio:</span>
-                                            <input type="tel" name="condominium" class="mask-money" value=""/>
+                                            {{ Form::label('condominium', 'Condomínio', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::tel('condominium', null, array_merge(['class' => 'mask-money'], ['placeholder' => 'R$ 0,00'])) }}
                                         </label>
                                     </div>
                                 </div>
@@ -133,58 +106,51 @@
 
                                 <div class="app_collapse_content d-none">
                                     <label class="label">
-                                        <span class="legend">Descrição do Imóvel:</span>
-                                        <textarea name="description" cols="30" rows="10" class="mce"></textarea>
+                                        {{ Form::label('description', 'Descrição do Imóvel', array_merge(['class' => 'legend'])) }}
+                                        {{ Form::textarea('description', null, ['class' => 'mce']) }}
                                     </label>
 
                                     <div class="label_g4">
                                         <label class="label">
-                                            <span class="legend">Dormitórios:</span>
-                                            <input type="tel" name="bedrooms" placeholder="Quantidade de Dormitórios"
-                                                   value=""/>
+                                            {{ Form::label('bedrooms', 'Dormitórios', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::number('bedrooms', null) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">Suítes:</span>
-                                            <input type="tel" name="suites" placeholder="Quantidade de Suítes"
-                                                   value=""/>
+                                            {{ Form::label('suites', 'Suítes', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::number('suites', null) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">Banheiros:</span>
-                                            <input type="tel" name="bathrooms" placeholder="Quantidade de Banheiros"
-                                                   value=""/>
+                                            {{ Form::label('bathrooms', 'Banheiros', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::number('bathrooms', null) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">Salas:</span>
-                                            <input type="tel" name="rooms" placeholder="Quantidade de Salas" value=""/>
+                                            {{ Form::label('rooms', 'Salas', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::number('rooms', null) }}
                                         </label>
                                     </div>
 
                                     <div class="label_g4">
                                         <label class="label">
-                                            <span class="legend">Garagem:</span>
-                                            <input type="tel" name="garage" placeholder="Quantidade de Garagem"
-                                                   value=""/>
+                                            {{ Form::label('garage', 'Garagens', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::number('garage', null) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">Garagem Coberta:</span>
-                                            <input type="tel" name="garage_covered"
-                                                   placeholder="Quantidade de Garagem Coberta" value=""/>
+                                            {{ Form::label('garage_covered', 'Garagens cobertas', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::number('garage_covered', null) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">Área Total:</span>
-                                            <input type="tel" name="area_total" placeholder="Quantidade de M&sup2;"
-                                                   value=""/>
+                                            {{ Form::label('area_total', 'Área total', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::number('area_total', null) }}
                                         </label>
 
                                         <label class="label">
-                                            <span class="legend">Área Útil:</span>
-                                            <input type="tel" name="area_util" placeholder="Quantidade de M&sup2;"
-                                                   value=""/>
+                                            {{ Form::label('area_util', 'Área útil', array_merge(['class' => 'legend'])) }}
+                                            {{ Form::number('area_util', null) }}
                                         </label>
                                     </div>
                                 </div>
@@ -196,52 +162,9 @@
                                     <span class="icon-plus-circle icon-notext"></span>
                                 </div>
 
+
                                 <div class="app_collapse_content d-none">
-                                    <div class="label_g2">
-                                        <label class="label">
-                                            <span class="legend">CEP:</span>
-                                            <input type="text" name="zipcode" class="zip_code_search"
-                                                   placeholder="Digite o CEP" value=""/>
-                                        </label>
-                                    </div>
-
-                                    <label class="label">
-                                        <span class="legend">Endereço:</span>
-                                        <input type="text" name="street" class="street" placeholder="Endereço Completo"
-                                               value=""/>
-                                    </label>
-
-                                    <div class="label_g2">
-                                        <label class="label">
-                                            <span class="legend">Número:</span>
-                                            <input type="text" name="number" placeholder="Número do Endereço" value=""/>
-                                        </label>
-
-                                        <label class="label">
-                                            <span class="legend">Complemento:</span>
-                                            <input type="text" name="complement" placeholder="Completo (Opcional)"
-                                                   value=""/>
-                                        </label>
-                                    </div>
-
-                                    <label class="label">
-                                        <span class="legend">Bairro:</span>
-                                        <input type="text" name="neighborhood" class="neighborhood" placeholder="Bairro"
-                                               value=""/>
-                                    </label>
-
-                                    <div class="label_g2">
-                                        <label class="label">
-                                            <span class="legend">Estado:</span>
-                                            <input type="text" name="state" class="state" placeholder="Estado"
-                                                   value=""/>
-                                        </label>
-
-                                        <label class="label">
-                                            <span class="legend">Cidade:</span>
-                                            <input type="text" name="city" class="city" placeholder="Cidade" value=""/>
-                                        </label>
-                                    </div>
+                                    @include('address::address')
                                 </div>
                             </div>
                         </div>
@@ -251,87 +174,89 @@
                             <div class="label_g5">
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="air_conditioning"><span>Ar Condicionado</span>
+                                        <input type="checkbox" value="1" name="air_conditioning"><span>Ar Condicionado</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="bar"><span>Bar</span>
+                                        <input type="checkbox" value="1" name="bar"><span>Bar</span>
+
                                     </label>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="library"><span>Biblioteca</span>
+                                        <input type="checkbox" value="1" name="library"><span>Biblioteca</span>
+                                        
                                     </label>
                                 </div>
 
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="barbecue_grill"><span>Churrasqueira</span>
+                                        <input type="checkbox" value="1" name="barbecue_grill"><span>Churrasqueira</span>
                                     </label>
                                 </div>
 
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="american_kitchen"><span>Cozinha Americana</span>
+                                        <input type="checkbox" value="1" name="american_kitchen"><span>Cozinha Americana</span>
                                     </label>
                                 </div>
 
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="fitted_kitchen"><span>Cozinha Planejada</span>
+                                        <input type="checkbox" value="1" name="fitted_kitchen"><span>Cozinha Planejada</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="pantry"><span>Despensa</span>
-                                    </label>
-                                </div>
-
-                                <div>
-                                    <label class="label">
-                                        <input type="checkbox" name="edicule"><span>Edícula</span>
+                                        <input type="checkbox" value="1" name="pantry"><span>Despensa</span>
                                     </label>
                                 </div>
 
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="office"><span>Escritório</span>
+                                        <input type="checkbox" value="1" name="edicule"><span>Edícula</span>
+                                    </label>
+                                </div>
+
+                                <div>
+                                    <label class="label">
+                                        <input type="checkbox" value="1" name="office"><span>Escritório</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="bathtub"><span>Banheira</span>
+                                        <input type="checkbox" value="1" name="bathtub"><span>Banheira</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="fireplace"><span>Lareira</span>
+                                        <input type="checkbox" value="1" name="fireplace"><span>Lareira</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="lavatory"><span>Lavabo</span>
+                                        <input type="checkbox" value="1" name="lavatory"><span>Lavabo</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="furnished"><span>Mobiliado</span>
+                                        <input type="checkbox" value="1" name="furnished"><span>Mobiliado</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="pool"><span>Piscina</span>
+                                        <input type="checkbox" value="1" name="pool"><span>Piscina</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="steam_room"><span>Sauna</span>
+                                        <input type="checkbox" value="1" name="steam_room"><span>Sauna</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <input type="checkbox" name="view_of_the_sea"><span>Vista para o Mar</span>
+                                        <input type="checkbox" value="1" name="view_of_the_sea"><span>Vista para o Mar</span>
                                     </label>
                                 </div>
                             </div>
@@ -340,7 +265,7 @@
                         <div id="images" class="d-none">
                             <label class="label">
                                 <span class="legend">Imagens</span>
-                                <input type="file" name="files[]" multiple>
+                                <input type="file" name="files[]" accept="image/jpeg, image/jpg, image/png" multiple>
                             </label>
 
                             <div class="content_image"></div>
@@ -350,7 +275,7 @@
                     <div class="text-right mt-2">
                         <button class="btn btn-large btn-green icon-check-square-o">Criar Imóvel</button>
                     </div>
-                </form>
+                {{ Form::close() }}
             </div>
         </div>
     </section>
