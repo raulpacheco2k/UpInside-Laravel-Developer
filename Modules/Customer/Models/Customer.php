@@ -2,12 +2,16 @@
 
 namespace Modules\Customer\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Laravel\Sanctum\HasApiTokens;
 use Modules\Address\Models\Address;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Customer extends Model
+
+class Customer extends Authenticatable
 {
+    use HasApiTokens;
+
     protected $fillable = [
         'name',
         'email',

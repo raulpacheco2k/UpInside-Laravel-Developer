@@ -1,5 +1,7 @@
 {
     "Customer": true,
     "Address": true,
-    "Companies": true
+    "Companies": true,
+    "Api": true,
+    "Properties": true
 }
