@@ -11,14 +11,13 @@
 |
 */
 
-//Route::middleware('auth:api')->get('/api', function (Request $request) {
-//    return $request->user();
-//});
+use Modules\Api\Http\Controllers\AuthController;
 
 Route::get('/ola', function (){
    return 'ola';
 })->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'auth'], function(){
-    Route::post('/login', [\Modules\Api\Http\Controllers\AuthController::class, 'Login']);
+    Route::post('/login', [AuthController::class, 'Login']);
+    Route::post('/refresh-token', [AuthController::class, 'refreshToken'])->middleware('auth:sanctum');
 });
